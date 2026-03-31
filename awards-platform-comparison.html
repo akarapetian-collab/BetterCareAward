@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Better Care Awards — Порівняння платформ</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --gold: #c8a850;
+    --gold-light: #e8d08a;
+    --cream: #faf8f2;
+    --blue-deep: #0d2c54;
+    --blue-mid: #1e4a82;
+    --blue-soft: #e8f0f8;
+    --green: #2d7a4f;
+    --green-soft: #e6f4ec;
+    --red: #b83232;
+    --red-soft: #fbeaea;
+    --amber: #c07830;
+    --amber-soft: #fef3e6;
+    --rule: #d4c8b0;
+    --text-muted: #666070;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', Georgia, serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--blue-deep);
+    color: #fff;
+    padding: 52px 60px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,168,80,.25) 0%, transparent 70%);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 40%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(30,74,130,.4) 0%, transparent 70%);
+  }
+  .header-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 14px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 14px;
+    max-width: 620px;
+    position: relative;
+    z-index: 1;
+  }
+  header p {
+    font-size: 16px;
+    color: rgba(255,255,255,.75);
+    max-width: 560px;
+    position: relative;
+    z-index: 1;
+  }
+  .header-meta {
+    margin-top: 28px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .meta-pill {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,.85);
+  }
+  .meta-pill strong { color: var(--gold-light); }
+
+  /* ── MAIN LAYOUT ── */
+  main { max-width: 1200px; margin: 0 auto; padding: 48px 40px 80px; }
+
+  section { margin-bottom: 60px; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--blue-deep);
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--gold);
+  }
+  .section-subtitle {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  /* ── CRITERIA GRID ── */
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .criteria-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .criteria-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+  .criteria-card h4 { font-size: 13px; font-weight: 600; color: var(--blue-deep); margin-bottom: 3px; }
+  .criteria-card p { font-size: 12.5px; color: var(--text-muted); line-height: 1.4; }
+
+  /* ── COMPARISON TABLE ── */
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--rule);
+    box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    min-width: 960px;
+  }
+
+  thead tr {
+    background: var(--blue-deep);
+    color: #fff;
+  }
+  thead th {
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12.5px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  thead th:first-child { border-radius: 0; }
+
+  /* Platform name cells */
+  .plat-col { min-width: 130px; font-weight: 600; }
+
+  tbody tr { border-bottom: 1px solid var(--rule); transition: background .15s; }
+  tbody tr:hover { background: var(--blue-soft); }
+  tbody tr:last-child { border-bottom: none; }
+
+  tbody td {
+    padding: 14px 16px;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  /* Alternating row tint */
+  tbody tr:nth-child(even) { background: #f7f5ee; }
+  tbody tr:nth-child(even):hover { background: var(--blue-soft); }
+
+  .plat-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--blue-deep);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .plat-tag {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 12px;
+    font-size: 11.5px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    white-space: nowrap;
+  }
+  .badge-yes { background: var(--green-soft); color: var(--green); }
+  .badge-no  { background: var(--red-soft);   color: var(--red);   }
+  .badge-partial { background: var(--amber-soft); color: var(--amber); }
+
+  .detail { font-size: 12px; color: var(--text-muted); margin-top: 3px; line-height: 1.4; }
+
+  .stars { color: var(--gold); letter-spacing: 1px; }
+  .stars-empty { color: var(--rule); }
+
+  .price-main { font-weight: 700; font-size: 14px; color: var(--blue-deep); }
+  .price-note { font-size: 11.5px; color: var(--text-muted); }
+
+  .pros-list, .cons-list { margin: 0; padding: 0; list-style: none; }
+  .pros-list li::before { content: '+'; color: var(--green); font-weight: 700; margin-right: 5px; }
+  .cons-list li::before { content: '−'; color: var(--red); font-weight: 700; margin-right: 5px; }
+  .pros-list li, .cons-list li { font-size: 12px; margin-bottom: 3px; line-height: 1.4; }
+
+  /* ── WINNER CARDS ── */
+  .verdict-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 800px) { .verdict-grid { grid-template-columns: 1fr; } }
+
+  .verdict-card {
+    border-radius: 12px;
+    padding: 26px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .verdict-card.top {
+    background: var(--blue-deep);
+    color: #fff;
+    border: 2px solid var(--gold);
+  }
+  .verdict-card.alt1 {
+    background: #fff;
+    border: 1px solid var(--rule);
+  }
+  .verdict-card.alt2 {
+    background: #fff;
+    border: 1px solid var(--rule);
+  }
+
+  .verdict-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .verdict-card.top .verdict-label { color: var(--gold-light); }
+  .verdict-card.alt1 .verdict-label { color: var(--blue-mid); }
+  .verdict-card.alt2 .verdict-label { color: var(--green); }
+
+  .verdict-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+  .verdict-card.top .verdict-name { color: #fff; }
+  .verdict-card.alt1 .verdict-name { color: var(--blue-deep); }
+  .verdict-card.alt2 .verdict-name { color: var(--blue-deep); }
+
+  .verdict-reason { font-size: 13.5px; line-height: 1.55; }
+  .verdict-card.top .verdict-reason { color: rgba(255,255,255,.82); }
+  .verdict-card.alt1 .verdict-reason, .verdict-card.alt2 .verdict-reason { color: var(--text-muted); }
+
+  .verdict-points {
+    margin-top: 14px;
+    list-style: none;
+    padding: 0;
+  }
+  .verdict-points li {
+    font-size: 12.5px;
+    padding: 4px 0;
+    border-top: 1px solid rgba(255,255,255,.12);
+  }
+  .verdict-card.alt1 .verdict-points li,
+  .verdict-card.alt2 .verdict-points li { border-top-color: var(--rule); }
+  .verdict-points li::before { content: '→ '; opacity: .6; }
+  .verdict-card.top .verdict-points li { color: rgba(255,255,255,.8); }
+
+  /* ── INSIGHTS ── */
+  .insights-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 700px) { .insights-grid { grid-template-columns: 1fr; } }
+
+  .insight-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 18px 20px;
+  }
+  .insight-platform {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--blue-mid);
+    margin-bottom: 8px;
+  }
+  .insight-quote {
+    font-style: italic;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
+  .insight-source {
+    font-size: 11.5px;
+    color: var(--text-muted);
+  }
+
+  /* ── GOOGLE SHEETS SECTION ── */
+  .sheets-box {
+    background: var(--green-soft);
+    border: 1px solid #a8d5bc;
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+  .sheets-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .sheets-box p { font-size: 13.5px; color: #2a5a3a; margin-bottom: 14px; }
+
+  .sheets-table-wrap {
+    overflow-x: auto;
+    border: 1px solid #a8d5bc;
+    border-radius: 6px;
+  }
+
+  .sheets-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    min-width: 900px;
+    background: #fff;
+  }
+  .sheets-table th {
+    background: #2d7a4f;
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    white-space: nowrap;
+  }
+  .sheets-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #d4ead8;
+    vertical-align: top;
+    line-height: 1.45;
+  }
+  .sheets-table tr:last-child td { border-bottom: none; }
+  .sheets-table tr:nth-child(even) td { background: #f4faf6; }
+
+  .copy-hint {
+    font-size: 12px;
+    color: #2a5a3a;
+    margin-top: 12px;
+    font-style: italic;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 32px 40px;
+    font-size: 12px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--rule);
+    background: #f5f3ec;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 680px) {
+    header { padding: 36px 24px 32px; }
+    header h1 { font-size: 30px; }
+    main { padding: 32px 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-label">Аналітичний звіт · Better Care Awards</div>
+  <h1>Порівняння платформ для управління премією</h1>
+  <p>Глибокий аналіз 4 інструментів: Evalato, AcclaimWorks, Award Force та Airtable — для проведення конкурсу з ~750 заявками та ~100 членами журі.</p>
+  <div class="header-meta">
+    <div class="meta-pill">📋 <strong>750</strong> заявок</div>
+    <div class="meta-pill">👩‍⚖️ <strong>100</strong> членів журі</div>
+    <div class="meta-pill">🌍 Потрібна локалізація (UA)</div>
+    <div class="meta-pill">📅 Березень 2026</div>
+  </div>
+</header>
+
+<main>
+
+<!-- SECTION 1: CRITERIA -->
+<section>
+  <h2 class="section-title">Критерії оцінювання</h2>
+  <p class="section-subtitle">На які параметри ми спираємося при порівнянні</p>
+  <div class="criteria-grid">
+    <div class="criteria-card"><div class="criteria-icon">📥</div><div><h4>Кабінет номінанта</h4><p>Зручна подача заявок, трекінг статусу, збереження чернеток</p></div></div>
+    <div class="criteria-card"><div class="criteria-icon">⚖️</div><div><h4>Кабінет журі</h4><p>Інтерфейс оцінювання, сліпе журі, різні режими голосування</p></div></div>
+    <div class="criteria-card"><div class="criteria-icon">🔧</div><div><h4>Гнучкість форм</h4><p>Custom form builder, умовна логіка, завантаження файлів</p></div></div>
+    <div class="criteria-card"><div class="criteria-icon">📈</div><div><h4>Масштабованість</h4><p>750+ заявок, 100 членів журі, паралельна робота</p></div></div>
+    <div class="criteria-card"><div class="criteria-icon">🇺🇦</div><div><h4>Локалізація</h4><p>Нативна українська або можливість перекладу інтерфейсу</p></div></div>
+    <div class="criteria-card"><div class="criteria-icon">💶</div><div><h4>Ціна</h4><p>Реальна вартість для зазначеного масштабу програми</p></div></div>
+    <div class="criteria-card"><div class="criteria-icon">🔗</div><div><h4>Embedded форма</h4><p>Чи можна вбудувати форму реєстрації прямо на власний сайт</p></div></div>
+    <div class="criteria-card"><div class="criteria-icon">🔒</div><div><h4>Безпека даних</h4><p>GDPR, шифрування, DPA, регіон зберігання — важливо для персональних даних</p></div></div>
+    <div class="criteria-card"><div class="criteria-icon">💳</div><div><h4>Момент оплати</h4><p>Платіж наперед чи лише при виході в live — гнучкість для пілотування</p></div></div>
+    <div class="criteria-card"><div class="criteria-icon">📋</div><div><h4>Клонування програми</h4><p>Чи можна скопіювати попередню програму для нового сезону</p></div></div>
+  </div>
+</section>
+
+<!-- SECTION 2: MAIN COMPARISON TABLE -->
+<section>
+  <h2 class="section-title">Детальне порівняння</h2>
+  <p class="section-subtitle">Розгорнута таблиця по всіх ключових параметрах</p>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Інструмент</th>
+          <th>Кабінет номінанта</th>
+          <th>Кабінет журі</th>
+          <th>Гнучкість форм</th>
+          <th>Масштабованість</th>
+          <th>Локалізація</th>
+          <th>UX</th>
+          <th>Ціна (орієнтовно)</th>
+          <th>Embedded форма на сайт</th>
+          <th>Безпека даних</th>
+          <th>Момент оплати</th>
+          <th>Клонування програми</th>
+          <th>Плюси</th>
+          <th>Мінуси</th>
+          <th>Коли обирати</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- EVALATO -->
+        <tr>
+          <td class="plat-col">
+            <span class="plat-name">Evalato</span>
+            <span class="plat-tag">Next-gen awards platform</span>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Так</span>
+            <div class="detail">Повноцінний портал: реєстрація, збереження чернеток, трекінг статусу, завантаження файлів будь-якого формату, автоматичні email-нотифікації</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Так</span>
+            <div class="detail">Окремий портал журі: кілька режимів оцінювання (зірки, бали, рейтинг, коментарі), сліпе журі, нормалізація балів, розподіл заявок між суддями</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Висока</span>
+            <div class="detail">Drag-and-drop конструктор, умовна логіка, всі типи полів, шаблони, брендування форм</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Повна</span>
+            <div class="detail">Pro: до 10 000 заявок; необмежена кількість суддів; 100 журі — без проблем</div>
+          </td>
+          <td>
+            <span class="badge badge-partial">⚠ 40+ мов</span>
+            <div class="detail">40+ мов для фронтенду. Українська — уточніть при реєстрації. Адмінпанель переважно англійська</div>
+          </td>
+          <td>
+            <span class="stars">★★★★★</span>
+            <div class="detail">Найбільш інтуїтивний з усіх. Безкоштовне тестування без ліміту. Мінімальна крива навчання</div>
+          </td>
+          <td>
+            <span class="price-main">€4 900/програма</span>
+            <div class="price-note">Pro план (до 10 000 заявок, усі функції). Без прихованих платежів. 1 рік активності</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Нативно</span>
+            <div class="detail">Готовий embed-код — copy-paste у HTML вашого сайту. Форма реєстрації відображається прямо на сайті. Жодного програміста не потрібно</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ GDPR / PCI DSS</span>
+            <div class="detail">Шифрування сховища, щоденні бекапи, 24/7 моніторинг. DPA підписується. Ви — Data Controller, Evalato — Processor. Видалення даних учасника — на запит</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Лише при Go Live</span>
+            <div class="detail">Платіж відбувається тільки коли ви натискаєте «Go live». До цього — безкоштовно без ліміту часу. Можна налаштовувати місяцями перед запуском</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Так, повноцінне</span>
+            <div class="detail">Кнопка Duplicate на дашборді. Клонується: форми, категорії, налаштування оплати, автоматичні email. Улюблена функція для щорічних програм</div>
+          </td>
+          <td>
+            <ul class="pros-list">
+              <li>Безкоштовне тестування без ліміту часу</li>
+              <li>Прозоре ціноутворення (не потрібно телефонувати)</li>
+              <li>Дуже швидкий старт (без онбордингу)</li>
+              <li>Чудова підтримка (G2: 4.8/5)</li>
+              <li>Активний розвиток продукту</li>
+              <li>Довіра UN, WWF, Red Cross</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="cons-list">
+              <li>Українська мова — не гарантована без уточнення</li>
+              <li>Брендування — лише на Pro+</li>
+              <li>Слабші функції для грантів/стипендій</li>
+            </ul>
+          </td>
+          <td style="font-size:12.5px;">Якщо потрібен кращий UX та найшвидший старт. Оптимальний баланс ціни і якості для 750 заявок</td>
+        </tr>
+
+        <!-- AWARD FORCE -->
+        <tr>
+          <td class="plat-col">
+            <span class="plat-name">Award Force</span>
+            <span class="plat-tag">Enterprise awards management</span>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Так</span>
+            <div class="detail">Entrant-centered дизайн: профіль учасника, збереження прогресу, мультиетапна подача, автоматичні нагадування</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Так</span>
+            <div class="detail">4 режими оцінювання, сліпе журі (без імен заявників), мульти-раундове журі, детальна звітність</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Висока</span>
+            <div class="detail">Потужний конструктор, умовна логіка, файли, відео, мультимовні форми</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Повна</span>
+            <div class="detail">Розроблений для великих об'ємів. 750 заявок — комфортно. Pro план підтримує великі програми</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Українська</span>
+            <div class="detail">Нативна підтримка української мови підтверджена (GetApp, G2). 30+ мов платформи</div>
+          </td>
+          <td>
+            <span class="stars">★★★★</span><span class="stars-empty">★</span>
+            <div class="detail">Добрий UX, хоча складніший ніж Evalato. Чудова підтримка. Без безкоштовного тріалу</div>
+          </td>
+          <td>
+            <span class="price-main">€5 000–6 600/програма</span>
+            <div class="price-note">Pro ~€5 000 + Onboarding €1 600. Growth ~€2 000 (обмежений обсяг). Без публічних деталей про ліміти Growth</div>
+          </td>
+          <td>
+            <span class="badge badge-partial">⚠ Обхідний шлях</span>
+            <div class="detail">Нативного embed-коду немає. Схема: зовнішня форма (Google Forms тощо) → Zapier → Award Force. Форма на сайті є, але потребує налаштування автоматизації</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Найвища — ISO 27001</span>
+            <div class="detail">ISO 27001 + PCI-DSS + GDPR + CCPA + HIPAA BAA. Захист на рівні поля (Standard/Elevated/Maximum). Вибір регіону зберігання даних (EU можливо). Penetration testing на запит</div>
+          </td>
+          <td>
+            <span class="badge badge-no">✗ Контракт наперед</span>
+            <div class="detail">Стандартна SaaS-модель: спочатку підписання договору та оплата. Онбординг (€1 600) — також вперед. Безкоштовного тестування без залучення команди немає</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Архівування сезонів</span>
+            <div class="detail">Program archiving та копіювання між сезонами — є. Повний обсяг клонування уточніть при демо</div>
+          </td>
+          <td>
+            <ul class="pros-list">
+              <li>🇺🇦 Підтверджена українська мова</li>
+              <li>4 режими оцінювання + сліпе журі</li>
+              <li>Зрілий продукт (15+ років)</li>
+              <li>Чудова команда підтримки</li>
+              <li>API, Salesforce, Stripe інтеграції</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="cons-list">
+              <li>Немає безкоштовного тріалу</li>
+              <li>Обов'язковий онбординг (+€1 600)</li>
+              <li>Дорожча від Evalato</li>
+              <li>Демо — тільки по запиту</li>
+            </ul>
+          </td>
+          <td style="font-size:12.5px;">Якщо критично важлива підтверджена українська мова та потрібні розширені можливості журі (сліпе оцінювання, мульти-раунд)</td>
+        </tr>
+
+        <!-- ACCLAIMWORKS -->
+        <tr>
+          <td class="plat-col">
+            <span class="plat-name">AcclaimWorks</span>
+            <span class="plat-tag">Traditional awards platform, UK</span>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Так</span>
+            <div class="detail">Портал номінанта є. Підтримка мультикатегорійних заявок, штрихкоди для фізичних матеріалів (спец. функція)</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Так</span>
+            <div class="detail">Онлайн-журі, Compliance модуль для перевірки якості, реал-тайм скорборд</div>
+          </td>
+          <td>
+            <span class="badge badge-partial">⚠ Помірна</span>
+            <div class="detail">Форми є, але менш гнучкі ніж конкуренти. Кастомні розширення — через команду AcclaimWorks</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Повна</span>
+            <div class="detail">20+ років досвіду з великими конкурсами. 750 заявок / 100 журі — без проблем</div>
+          </td>
+          <td>
+            <span class="badge badge-no">✗ Ні</span>
+            <div class="detail">Інтерфейс переважно англійський. Відомостей про підтримку української немає</div>
+          </td>
+          <td>
+            <span class="stars">★★★</span><span class="stars-empty">★★</span>
+            <div class="detail">Старший інтерфейс, потребує онбордингу. 24/7 підтримка. Не найпростіший для самостійного старту</div>
+          </td>
+          <td>
+            <span class="price-main">Тільки по запиту</span>
+            <div class="price-note">Публічного прайсу немає. Орієнтовно від £3 000–8 000+/рік залежно від масштабу. Потрібен дзвінок з командою</div>
+          </td>
+          <td>
+            <span class="badge badge-partial">❓ Невідомо</span>
+            <div class="detail">Публічної документації про embed-код немає. Потрібно уточнювати при демо — можливо доступно через кастомне налаштування</div>
+          </td>
+          <td>
+            <span class="badge badge-partial">❓ Невідомо</span>
+            <div class="detail">Публічних сертифікатів (ISO, SOC 2) немає на сайті. DPA треба запитувати окремо. Деталі розкриваються тільки при переговорах</div>
+          </td>
+          <td>
+            <span class="badge badge-partial">❓ Невідомо</span>
+            <div class="detail">Модель оплати розкривається тільки при зустрічі з командою. Ймовірно стандартна передплата</div>
+          </td>
+          <td>
+            <span class="badge badge-partial">❓ Невідомо</span>
+            <div class="detail">Публічної інформації про клонування програм немає. Уточніть при демо-дзвінку</div>
+          </td>
+          <td>
+            <ul class="pros-list">
+              <li>20+ років досвіду</li>
+              <li>24/7 підтримка у будь-якій точці світу</li>
+              <li>Custom розширення під специфічні потреби</li>
+              <li>Сильна для B2B/корпоративних нагород</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="cons-list">
+              <li>Немає публічного ціноутворення</li>
+              <li>Немає самостійного тестування</li>
+              <li>Старший UI порівняно з конкурентами</li>
+              <li>Немає української мови</li>
+              <li>Потрібне навчання команди</li>
+            </ul>
+          </td>
+          <td style="font-size:12.5px;">Якщо потрібен досвідчений партнер для великого міжнародного конкурсу і є бюджет на custom рішення. Не для цього кейсу</td>
+        </tr>
+
+        <!-- AIRTABLE -->
+        <tr>
+          <td class="plat-col">
+            <span class="plat-name">Airtable</span>
+            <span class="plat-tag">No-code database platform</span>
+          </td>
+          <td>
+            <span class="badge badge-partial">⚠ Потребує налаштування</span>
+            <div class="detail">Нативного порталу немає. Форми Airtable + Interfaces для перегляду статусу — потрібне значне налаштування</div>
+          </td>
+          <td>
+            <span class="badge badge-partial">⚠ Потребує розробки</span>
+            <div class="detail">Готового журі-порталу немає. Views + Automations дають частковий функціонал, але 100 суддів як платні користувачі — дуже дорого</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Максимальна</span>
+            <div class="detail">Найгнучкіший конструктор форм і бази даних. Умовна логіка, автоматизації, API. Але все потребує ручної побудови</div>
+          </td>
+          <td>
+            <span class="badge badge-partial">⚠ Технічно так</span>
+            <div class="detail">750 записів легко. Але 100 суддів = 100 платних seats ($24–54/міс. кожен). Загальна вартість невиправдана</div>
+          </td>
+          <td>
+            <span class="badge badge-no">✗ Ні</span>
+            <div class="detail">Інтерфейс англійський. Форми можна зробити українською вручну. Немає системної локалізації</div>
+          </td>
+          <td>
+            <span class="stars">★★★</span><span class="stars-empty">★★</span>
+            <div class="detail">Для адміна — добре (якщо знає Airtable). Для 750 номінантів і 100 журі без досвіду — складно. Потрібен технічний фахівець</div>
+          </td>
+          <td>
+            <span class="price-main">$2 400–5 400+/міс.</span>
+            <div class="price-note">Team план: $24/user × 100 суддів = $2 400/міс! Business: $54/user × 100 = $5 400/міс. Абсолютно невигідно для цього масштабу</div>
+          </td>
+          <td>
+            <span class="badge badge-yes">✓ Так (iframe)</span>
+            <div class="detail">Форми Airtable вбудовуються стандартним iframe на будь-який сайт. Але це лише форма подачі, не повноцінний портал з трекінгом статусу</div>
+          </td>
+          <td>
+            <span class="badge badge-partial">⚠ SOC 2 / GDPR (з обмовками)</span>
+            <div class="detail">SOC 2 Type II, GDPR-compliant. Але дані за замовчуванням зберігаються в США. EU-регіон — лише на Enterprise. Для GDPR з даними громадян ЄС — потрібне уточнення</div>
+          </td>
+          <td>
+            <span class="badge badge-no">✗ Щомісячна передплата</span>
+            <div class="detail">Оплата починається з першого дня активації плану. Немає моделі «налаштуй — заплати при запуску»</div>
+          </td>
+          <td>
+            <span class="badge badge-partial">⚠ Дублювання Base</span>
+            <div class="detail">Можна продублювати базу даних, але це не «програма» в сенсі конкурсу. Весь workflow потрібно налаштовувати заново</div>
+          </td>
+          <td>
+            <ul class="pros-list">
+              <li>Абсолютна гнучкість налаштування</li>
+              <li>Відмінна екосистема інтеграцій</li>
+              <li>Можна побудувати будь-який workflow</li>
+              <li>Хороша для внутрішніх задач команди</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="cons-list">
+              <li>Немає готового порталу для номінантів</li>
+              <li>Немає готового порталу для журі</li>
+              <li>100 суддів = катастрофічно дорого</li>
+              <li>Потрібен технічний ресурс для побудови</li>
+              <li>Немає спеціалізованого функціоналу нагород</li>
+              <li>Немає української локалізації</li>
+            </ul>
+          </td>
+          <td style="font-size:12.5px;">Для внутрішнього трекінгу або дуже маленьких конкурсів. Для Better Care Awards — НЕ рекомендується через вартість і відсутність готових порталів</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 3: GOOGLE SHEETS TABLE -->
+<section>
+  <h2 class="section-title">Таблиця для Google Sheets</h2>
+  <p class="section-subtitle">Скопіюйте таблицю нижче прямо у Google Sheets — структура готова до заповнення</p>
+
+  <div class="sheets-box">
+    <h3>📋 Як скопіювати</h3>
+    <p>Виділіть всю таблицю нижче (Ctrl+A у межах таблиці), скопіюйте (Ctrl+C) та вставте у Google Sheets (Ctrl+V). Дані рознесуться по колонках автоматично.</p>
+  </div>
+
+  <div class="sheets-table-wrap">
+    <table class="sheets-table">
+      <thead>
+        <tr>
+          <th>Інструмент</th>
+          <th>Позиціонування</th>
+          <th>Кабінет номінанта</th>
+          <th>Кабінет журі</th>
+          <th>Гнучкість форм</th>
+          <th>Масштабованість (750 зявок / 100 журі)</th>
+          <th>Локалізація UA</th>
+          <th>UX (1-5)</th>
+          <th>Ціна (орієнтовно)</th>
+          <th>Embedded форма на сайт</th>
+          <th>Безпека даних</th>
+          <th>Момент оплати</th>
+          <th>Клонування програми</th>
+          <th>Ключові плюси</th>
+          <th>Ключові мінуси</th>
+          <th>Рекомендація</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Evalato</td>
+          <td>Next-gen awards management; для нагород, конкурсів, грантів будь-якого масштабу</td>
+          <td>ТАК — повноцінний портал; реєстрація, чернетки, трекінг статусу, всі формати файлів</td>
+          <td>ТАК — окремий портал; кілька режимів оцінювання, сліпе журі, нормалізація балів, розподіл заявок</td>
+          <td>ВИСОКА — drag-and-drop, умовна логіка, всі типи полів, шаблони</td>
+          <td>ТАК — Pro план до 10 000 заявок; необмежена кількість суддів</td>
+          <td>40+ мов (уточніть українську при реєстрації); адмінпанель англ.</td>
+          <td>5/5 — найінтуїтивніший; безкоштовне тестування без ліміту</td>
+          <td>€4 900 / програму (Pro, 1 рік); прозоре ціноутворення без прихованих платежів</td>
+          <td>ТАК — нативний embed-код; copy-paste у HTML сайту; жодного програміста</td>
+          <td>GDPR + PCI DSS; DPA підписується; ви — Data Controller; шифрування + щоденні бекапи</td>
+          <td>ОПЛАТА ЛИШЕ ПРИ GO LIVE — безкоштовне налаштування без ліміту часу; платите тільки коли готові запускати</td>
+          <td>ТАК — повноцінне клонування: форми, категорії, email, налаштування оплати — одна кнопка Duplicate</td>
+          <td>Безкоштовне тестування; прозорий прайс; мінімальна крива навчання; підтримка 4.8/5; активний розвиток</td>
+          <td>Українська — не підтверджена офіційно; брендування лише на Pro+</td>
+          <td>ТОП-1 для Better Care Awards — найкращий баланс ціни, UX і функціоналу</td>
+        </tr>
+        <tr>
+          <td>Award Force</td>
+          <td>Enterprise awards management; зрілий продукт для великих організацій (15+ років)</td>
+          <td>ТАК — entrant-centered дизайн; профіль, мультиетапна подача, нагадування</td>
+          <td>ТАК — 4 режими оцінювання; підтверджене сліпе журі; мульти-раундове оцінювання</td>
+          <td>ВИСОКА — потужний конструктор; умовна логіка; мультимовні форми</td>
+          <td>ТАК — розроблений для великих об'ємів; 750 заявок / 100 журі — комфортно</td>
+          <td>ТАК — Українська підтверджена (G2 / GetApp); 30+ мов платформи</td>
+          <td>4/5 — добрий UX; складніший за Evalato; без безкоштовного тріалу</td>
+          <td>€5 000–6 600 / програму (Pro + Onboarding €1 600); Growth €2 000 (обмежений обсяг)</td>
+          <td>ОБХІДНИЙ ШЛЯХ — нативного embed немає; схема: зовнішня форма → Zapier → Award Force</td>
+          <td>НАЙВИЩА — ISO 27001 + PCI-DSS + GDPR + CCPA + HIPAA BAA; вибір регіону EU; захист на рівні поля</td>
+          <td>КОНТРАКТ НАПЕРЕД — стандартна SaaS; договір + оплата до старту; онбординг €1 600 також вперед</td>
+          <td>ТАК — архівування сезонів та копіювання між програмами; повний обсяг уточнити при демо</td>
+          <td>Підтверджена українська; 4 режими журі + сліпе; зрілий продукт; API; чудова підтримка</td>
+          <td>Немає безкоштовного тріалу; обов'язковий онбординг (+€1 600); дорожча за Evalato; embed — лише через Zapier</td>
+          <td>Альтернатива №1 якщо критична підтверджена UA-мова та потрібне сліпе журі</td>
+        </tr>
+        <tr>
+          <td>AcclaimWorks</td>
+          <td>Традиційна awards платформа; UK-базована; 20+ років досвіду; B2B / корпоративний сегмент</td>
+          <td>ТАК — портал номінанта є; мультикатегорії; штрихкоди для фіз. матеріалів</td>
+          <td>ТАК — онлайн-журі; Compliance модуль; реал-тайм скорборд</td>
+          <td>ПОМІРНА — кастомні розширення через команду AcclaimWorks; менш гнучкий self-service</td>
+          <td>ТАК — досвід з великими конкурсами; 750 заявок / 100 журі без проблем</td>
+          <td>НІ — інтерфейс переважно англійський; UA невідома</td>
+          <td>3/5 — старший UI; потребує навчання; 24/7 підтримка</td>
+          <td>Тільки по запиту; орієнтовно £3 000–8 000+ / рік</td>
+          <td>НЕВІДОМО — публічної документації про embed немає; уточнювати при демо</td>
+          <td>НЕВІДОМО — публічних сертифікатів немає; DPA треба запитувати окремо при переговорах</td>
+          <td>НЕВІДОМО — модель оплати розкривається тільки при зустрічі; ймовірно передплата</td>
+          <td>НЕВІДОМО — публічної інформації немає; уточнити при демо</td>
+          <td>20+ років досвіду; 24/7 підтримка; custom розширення; сильна для корпоративних нагород</td>
+          <td>Немає публічного прайсу; старший UI; немає UA-мови; потрібне навчання; немає self-service тестування</td>
+          <td>НЕ рекомендується для Better Care Awards — немає UA, закрите ціноутворення</td>
+        </tr>
+        <tr>
+          <td>Airtable</td>
+          <td>No-code database платформа загального призначення; НЕ спеціалізована для нагород</td>
+          <td>ЧАСТКОВО — нативного порталу немає; потрібне значне налаштування через Forms + Interfaces</td>
+          <td>ЧАСТКОВО — готового журі-порталу немає; 100 суддів = 100 платних seats = дуже дорого</td>
+          <td>МАКСИМАЛЬНА — найгнучкіший конструктор; але все потрібно будувати вручну</td>
+          <td>ТЕХНІЧНО ТАК — але 100 суддів × $24/міс. = $2 400/міс.; вартість невиправдана</td>
+          <td>НІ — інтерфейс англійський; форми можна зробити UA вручну</td>
+          <td>3/5 — для технічного адміна добре; для 100 журі без досвіду — складно</td>
+          <td>$2 400–5 400+/міс. лише за seats для 100 суддів (Team $24/user або Business $54/user)</td>
+          <td>ТАК (iframe) — форми вбудовуються, але лише форма подачі; немає трекінгу статусу для номінанта</td>
+          <td>SOC 2 Type II + GDPR; але EU-регіон лише на Enterprise; дані в США за замовчуванням — ризик для GDPR</td>
+          <td>ЩОМІСЯЧНА ПЕРЕДПЛАТА — оплата з першого дня; немає моделі «заплати при запуску»</td>
+          <td>ЧАСТКОВЕ — дублювання бази даних є, але це не клонування програми; весь workflow перебудовувати вручну</td>
+          <td>Абсолютна гнучкість; відмінна екосистема інтеграцій; можна побудувати будь-який workflow</td>
+          <td>Немає готових порталів; 100 журі = неприйнятно дорого; потрібен технічний ресурс; немає UA</td>
+          <td>НЕ рекомендується — надмірно дорого для цього масштабу; відсутні необхідні функції з коробки</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="copy-hint">💡 Порада: після вставки у Google Sheets — виділіть рядок заголовків і застосуйте «Закріпити рядок» (View → Freeze → 1 row) для зручної навігації.</p>
+</section>
+
+<!-- SECTION 3b: FOUR NEW CRITERIA SUMMARY -->
+<section>
+  <h2 class="section-title">Додаткові критерії — детальний огляд</h2>
+  <p class="section-subtitle">Embedded форма · Безпека персональних даних · Момент оплати · Клонування програми</p>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
+
+    <!-- EMBEDDED FORM -->
+    <div style="background:#fff; border:1px solid var(--rule); border-radius:10px; overflow:hidden;">
+      <div style="background:var(--blue-deep); color:#fff; padding:14px 20px; font-weight:700; font-size:14px; display:flex; align-items:center; gap:10px;">
+        <span style="font-size:20px;">🔗</span> Embedded форма на власний сайт
+      </div>
+      <div style="padding:18px 20px;">
+        <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--rule);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">Evalato</strong>
+            <span class="badge badge-yes">✓ Нативний embed</span>
+          </div>
+          <div class="detail">Готовий код — copy-paste у HTML вашого сайту. Форма реєстрації відображається прямо на сторінці. Жодного програміста, жодного Zapier.</div>
+        </div>
+        <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--rule);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">Award Force</strong>
+            <span class="badge badge-partial">⚠ Через Zapier</span>
+          </div>
+          <div class="detail">Нативного embed немає. Схема: зовнішня форма (Google Forms тощо) → Zapier → Award Force. Форма на сайті є, але потрібне налаштування автоматизації.</div>
+        </div>
+        <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--rule);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">AcclaimWorks</strong>
+            <span class="badge badge-partial">❓ Невідомо</span>
+          </div>
+          <div class="detail">Документації немає публічно. Уточнити при демо-дзвінку.</div>
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">Airtable</strong>
+            <span class="badge badge-partial">⚠ iframe (лише форма)</span>
+          </div>
+          <div class="detail">Форма вбудовується стандартним iframe. Але це лише подача заявки — без трекінгу статусу та особистого кабінету номінанта.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATA SECURITY -->
+    <div style="background:#fff; border:1px solid var(--rule); border-radius:10px; overflow:hidden;">
+      <div style="background:var(--blue-deep); color:#fff; padding:14px 20px; font-weight:700; font-size:14px; display:flex; align-items:center; gap:10px;">
+        <span style="font-size:20px;">🔒</span> Безпека персональних даних
+      </div>
+      <div style="padding:18px 20px;">
+        <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--rule);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">Evalato</strong>
+            <span class="badge badge-yes">✓ GDPR + PCI DSS + DPA</span>
+          </div>
+          <div class="detail">Шифрування сховища, щоденні бекапи, 24/7 моніторинг. Ви — Data Controller, Evalato — Processor. DPA підписується. Видалення даних на запит.</div>
+        </div>
+        <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--rule);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">Award Force</strong>
+            <span class="badge badge-yes">✓ ISO 27001 — найвища</span>
+          </div>
+          <div class="detail">ISO 27001 + PCI-DSS + GDPR + CCPA + HIPAA BAA. Захист на рівні кожного поля форми (Standard / Elevated / Maximum). Вибір EU-регіону зберігання даних. Penetration testing на запит.</div>
+        </div>
+        <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--rule);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">AcclaimWorks</strong>
+            <span class="badge badge-partial">❓ Невідомо</span>
+          </div>
+          <div class="detail">Публічних сертифікатів немає на сайті. DPA — тільки при переговорах. Уточнити обов'язково при демо.</div>
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">Airtable</strong>
+            <span class="badge badge-partial">⚠ SOC 2 / GDPR (з обмовками)</span>
+          </div>
+          <div class="detail">SOC 2 Type II + GDPR. Але EU-регіон зберігання — лише на Enterprise. За замовчуванням дані в США. Ризик для даних громадян ЄС без Enterprise-плану.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENT TIMING -->
+    <div style="background:#fff; border:1px solid var(--rule); border-radius:10px; overflow:hidden;">
+      <div style="background:var(--blue-deep); color:#fff; padding:14px 20px; font-weight:700; font-size:14px; display:flex; align-items:center; gap:10px;">
+        <span style="font-size:20px;">💳</span> Момент оплати — наперед чи при Go Live?
+      </div>
+      <div style="padding:18px 20px;">
+        <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--rule);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">Evalato</strong>
+            <span class="badge badge-yes">✓ Платиш ЛИШЕ при Go Live</span>
+          </div>
+          <div class="detail">Безкоштовне налаштування без ліміту часу. Платіж відбувається тільки коли ви натискаєте кнопку «Go live» у дашборді. Після оплати — 365 днів активності програми.</div>
+        </div>
+        <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--rule);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">Award Force</strong>
+            <span class="badge badge-no">✗ Контракт наперед</span>
+          </div>
+          <div class="detail">Стандартна SaaS-модель: підписання договору → оплата → старт. Онбординг (€1 600) також оплачується заздалегідь. Безкоштовного тестування без комунікації з командою немає.</div>
+        </div>
+        <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--rule);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">AcclaimWorks</strong>
+            <span class="badge badge-partial">❓ Невідомо</span>
+          </div>
+          <div class="detail">Модель оплати розкривається лише при переговорах. Ймовірно — стандартна передплата.</div>
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">Airtable</strong>
+            <span class="badge badge-no">✗ Щомісячна передплата</span>
+          </div>
+          <div class="detail">Оплата починається з першого дня активації плану. Немає моделі «налаштуй і заплати коли готовий».</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLONE PROGRAM -->
+    <div style="background:#fff; border:1px solid var(--rule); border-radius:10px; overflow:hidden;">
+      <div style="background:var(--blue-deep); color:#fff; padding:14px 20px; font-weight:700; font-size:14px; display:flex; align-items:center; gap:10px;">
+        <span style="font-size:20px;">📋</span> Клонування програми (для нового сезону)
+      </div>
+      <div style="padding:18px 20px;">
+        <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--rule);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">Evalato</strong>
+            <span class="badge badge-yes">✓ Повноцінне (1 кнопка)</span>
+          </div>
+          <div class="detail">Кнопка Duplicate на дашборді. Клонується все: форми, категорії, налаштування оплати, автоматичні email. Найпопулярніша функція у відгуках — «щороку запускаємо нову редакцію з кількома правками».</div>
+        </div>
+        <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--rule);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">Award Force</strong>
+            <span class="badge badge-yes">✓ Архівування сезонів</span>
+          </div>
+          <div class="detail">Program archiving та копіювання між сезонами підтверджено. Точний обсяг того, що клонується — уточніть при демо.</div>
+        </div>
+        <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--rule);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">AcclaimWorks</strong>
+            <span class="badge badge-partial">❓ Невідомо</span>
+          </div>
+          <div class="detail">Публічної інформації немає. Уточнити при демо-дзвінку.</div>
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <strong style="color:var(--blue-deep);">Airtable</strong>
+            <span class="badge badge-partial">⚠ Лише дублювання бази</span>
+          </div>
+          <div class="detail">Можна продублювати базу даних, але це не клонування «програми» як такої. Весь workflow — форми, автоматизації, view-и для журі — треба налаштовувати заново.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Quick summary bar -->
+  <div style="background:var(--blue-deep); color:#fff; border-radius:10px; padding:20px 28px; display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:16px; text-align:center;">
+    <div>
+      <div style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px;">Embedded форма</div>
+      <div style="font-weight:700; font-size:15px;">Evalato</div>
+      <div style="font-size:12px; color:rgba(255,255,255,.6);">єдиний нативно</div>
+    </div>
+    <div>
+      <div style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px;">Безпека даних</div>
+      <div style="font-weight:700; font-size:15px;">Award Force</div>
+      <div style="font-size:12px; color:rgba(255,255,255,.6);">ISO 27001 + EU регіон</div>
+    </div>
+    <div>
+      <div style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px;">Гнучкість оплати</div>
+      <div style="font-weight:700; font-size:15px;">Evalato</div>
+      <div style="font-size:12px; color:rgba(255,255,255,.6);">платиш при Go Live</div>
+    </div>
+    <div>
+      <div style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px;">Клонування</div>
+      <div style="font-weight:700; font-size:15px;">Evalato</div>
+      <div style="font-size:12px; color:rgba(255,255,255,.6);">1 кнопка, все включено</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: VERDICT -->
+<section>
+  <h2 class="section-title">Висновки та рекомендації</h2>
+  <p class="section-subtitle">На основі аналізу для контексту Better Care Awards (~750 заявок, ~100 журі)</p>
+  <div class="verdict-grid">
+
+    <div class="verdict-card top">
+      <div class="verdict-label">🏆 ТОП-1 — Найкращий вибір</div>
+      <div class="verdict-name">Evalato</div>
+      <div class="verdict-reason">
+        Найкращий баланс між функціоналом, зручністю та вартістю. Pro план за €4 900 покриває до 10 000 заявок та необмежену кількість суддів — для 750 заявок і 100 журі це ідеально з запасом. Безкоштовне тестування дозволяє впевнитись у платформі до оплати.
+      </div>
+      <ul class="verdict-points">
+        <li>€4 900 за повний цикл програми (1 рік)</li>
+        <li>Найкращий UX для номінантів і журі</li>
+        <li>Нативний embed-код — форма на вашому сайті</li>
+        <li>Платите ТІЛЬКИ при Go Live — тестуйте безлімітно</li>
+        <li>Клонування програми одною кнопкою</li>
+        <li>GDPR DPA, ви — власник даних</li>
+        <li>⚠ Уточніть UA-мову перед покупкою</li>
+      </ul>
+    </div>
+
+    <div class="verdict-card alt1">
+      <div class="verdict-label">💰 Альтернатива — якщо UA критична</div>
+      <div class="verdict-name">Award Force</div>
+      <div class="verdict-reason">
+        Якщо підтверджена українська мова є безумовною вимогою — Award Force є єдиним варіантом з офіційної підтримкою. Дорожче (€6 600+ з онбордингом), але надійно та матуро.
+      </div>
+      <ul class="verdict-points">
+        <li>Українська підтверджена офіційно</li>
+        <li>€5 000 Pro + €1 600 onboarding</li>
+        <li>Найвища безпека: ISO 27001, EU-регіон, захист по полях</li>
+        <li>Сліпе журі, 4 режими оцінювання</li>
+        <li>⚠ Embed лише через Zapier — не нативно</li>
+        <li>⚠ Оплата наперед, без Go Live моделі</li>
+      </ul>
+    </div>
+
+    <div class="verdict-card alt2">
+      <div class="verdict-label">🔧 Альтернатива — максимальна кастомізація</div>
+      <div class="verdict-name">Airtable*</div>
+      <div class="verdict-reason">
+        Технічно найгнучкіший, але <strong>не рекомендується</strong> для цього кейсу. 100 членів журі = від $2 400/міс. тільки за seats. Немає готових порталів. Потрібен IT-фахівець для побудови. Розгляньте лише для внутрішнього адміністрування паралельно з основною платформою.
+      </div>
+      <ul class="verdict-points">
+        <li>Лише для внутрішнього трекінгу команди</li>
+        <li>Не замінить спеціалізовану платформу</li>
+        <li>100 журі × $24/міс. = $2 400/міс.</li>
+        <li>Embed форм є, але без порталу номінанта</li>
+        <li>EU-регіон даних — лише на Enterprise</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 5: REAL INSIGHTS -->
+<section>
+  <h2 class="section-title">Реальні відгуки користувачів</h2>
+  <p class="section-subtitle">Що кажуть організатори, які вже використовують ці платформи (G2, Capterra, SoftwareAdvice)</p>
+  <div class="insights-grid">
+
+    <div class="insight-card">
+      <div class="insight-platform">Evalato · G2 Review</div>
+      <div class="insight-quote">«Ми управляємо щорічною програмою мікрогрантів з дуже обмеженим бюджетом. Evalato вирішує всі наші потреби — форми, розподіл заявок між рецензентами, зведення балів — і при цьому значно дешевша за інші варіанти. Підтримка реагує блискавично.»</div>
+      <div class="insight-source">Verified User, освітній сектор, малий некомерційний</div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-platform">Evalato · Capterra</div>
+      <div class="insight-quote">«Від налаштування категорій до порталів номінантів і журі — весь процес безшовний. Те, що можна одночасно вести кілька програм, і що є автоматичні email-нотифікації — це справжній time-saver.»</div>
+      <div class="insight-source">Verified User, HR-нагороди, середня організація</div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-platform">Award Force · G2</div>
+      <div class="insight-quote">«Award Force дозволяє отримувати заявки від учасників з усього світу, розподіляти їх між журі анонімно (без імен заявників — це ключово), відстежувати записи та комунікувати з усіма через одну кнопку.»</div>
+      <div class="insight-source">Verified User, міжнародний конкурс, велика організація</div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-platform">Award Force · SoftwareAdvice</div>
+      <div class="insight-quote">«Я проводжу конкурси з онлайн-журі вже чотири роки. Все дуже добре працює — учасники, журі та організатори завжди задоволені. Award Force — найкраще рішення, яке я тестувала, і воно має все включено в Pro, без додаткових plug-in.»</div>
+      <div class="insight-source">Verified User, скандинавський конкурс дизайну</div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Підготовлено для Better Care Awards · Аналіз на основі даних G2, Capterra, GetApp, SoftwareAdvice та офіційних сайтів платформ · Березень 2026</p>
+  <p style="margin-top:6px;">Ціни орієнтовні та можуть змінюватися — уточнюйте актуальні умови безпосередньо у вендорів.</p>
+</footer>
+
+</body>
+</html>
